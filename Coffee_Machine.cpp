@@ -8,12 +8,12 @@ std::string Coffee_Machine::print_out() {
 	{	temp = "On"; }
 	else 
 	{	temp = "Off"; }
-	std::cout << "\t\Coffee %: " << temp;
-	std::cout << "\tDegree: " << (temp == "On" ? c_val : 0) << " \*C";
+	std::cout << temp;
+	std::cout << "\tDegree: " << (temp == "On" ? c_val : 0) << " \370C\n";
 	if (c_daily == true) 
-	{	std::cout << "Daily coffee: On";	}
+	{	std::cout << "Daily coffee: On ";	}
 	else
-	{	std::cout << "Daily coffee: On";	}
+	{	std::cout << "Daily coffee: Off";	}
 	std::cout << "\tTime: ";
 	if (c_time < 10) { std::cout << "0"; }
 	std::cout << c_time << "\:00\n";

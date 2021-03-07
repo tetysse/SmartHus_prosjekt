@@ -15,5 +15,6 @@ public:
 	{
 		h_val = status;
 	};
+	int get_temperature() { return h_val; };
 	std::string print_out();
 };
