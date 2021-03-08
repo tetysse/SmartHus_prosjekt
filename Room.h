@@ -11,24 +11,40 @@
 
 class Room {
 protected:
+    int r_id;
+    std::string r_name;
     std::vector<Door*> doorList;
     std::vector<Light*> lightList;
     std::vector<Heater*> heaterList;
     std::vector<Coffee_Machine*> coffeeList;
 
 public:
-    std::string r_name;
+    Room(std::string name, int id) { r_name = name, r_id = id; };
     void add_instrument(int id, int i_val);
     void add_door(int id);
     void quick_door(std::string name, int id, Position openClosed);
     void quick_light(std::string name, int id, int val, Position onOff, bool digital);
     void quick_coffee(std::string name, int id, int val, Position onOff, int time, bool daily);
     void quick_heater(std::string name, int id, int val, Position onOff);
+    void delete_door();
+    void delete_light();
+    void delete_heater();
+    void delete_coffee();
     void add_light(int id);
     void add_coffee(int id);
     void add_heater(int id);
-    void print_room();
+    void print_room(int header);
+    void print_door(int header);
+    void print_light(int header);
+    void print_coffee(int header);
+    void print_heater(int header);
+    void configure_door();
+    void configure_light();
+    void configure_heater();
+    void configure_coffee();
     void quick_start();
+    std::string r_get_name() { return r_name; };
+    int r_get_id() { return r_id; };
 };
 
 

@@ -9,6 +9,6 @@ std::string Heater::print_out() {
 	}
 	else { temp = "Off"; }
 	std::cout << "\tCurrently: " << temp;
-	std::cout << "\tDegree: " << (temp == "On" ? h_val : 0) << "\*C\n";
+	std::cout << "\tDegree: " << (temp == "On" ? h_val : 0) << "\370C\n";
 	return "Heater";
 }

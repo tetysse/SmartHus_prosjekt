@@ -6,12 +6,6 @@
 #include <thread>
 #include "Instrument.h"
 
-// Coffee: 
-//Name, id, cups of coffee
-//Machine status, Time of daily coffee, daily coffee activated
-//
-
-
 class Coffee_Machine : public Instrument
 {
 protected:
@@ -25,6 +19,7 @@ public:
 	int c_get_status() { return c_val; };
 	int c_get_time() { return c_time; };
 	bool c_get_daily() { return c_daily; }
-	void set_coffe_time(int time) { c_time = time; }; // To be added
+	void set_coffe_time(int time) { c_time = time; };
+	~Coffee_Machine() {};
 };
 

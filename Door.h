@@ -12,4 +12,5 @@ protected:
 public:
 	Door(std::string name, int id, Position pos) : Instrument(name, id, pos) {};
 	std::string print_out();
+	~Door() {};
 };
