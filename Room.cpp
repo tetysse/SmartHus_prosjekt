@@ -46,7 +46,12 @@ void Room::print_light(int header) {
         std::cout << "Status: " << (digital_pos == true ? "On" : "Off");
         if (digital_pos == true) { std::cout << ",  "; }
         else { std::cout << ", "; }
-        std::cout << "Set point: " << analog_pos << " \%\n";
+        if (lightList[i]->l_get_dig() == true) {
+            std::cout << "Light is not dimmable\n";
+        }
+        else {
+            std::cout << "Set point: " << analog_pos << " \%\n";
+        }
     }
     if (lightList.size() == 0) {
         std::cout << "There are no lights configured in this room!\n";
@@ -355,33 +360,212 @@ void Room::delete_coffee() {
 
 void Room::configure_door() {
     int c;
-    char  c2;
+    int c2;
+    char c3;
+    std::string n_name;
     int size = doorList.size();
     std::cout << "configure door...\n";
     print_door(1);
-    std::cout << "Press 1 - " << size << " to configure a door\n";
-    std::cout << "Press '0' to go back to the menu\n";
-    std::cin >> c;
-    std::cout << "Do you wish to change doorname? (Y/N) ";
-    std::cin >> c2;
-    if (c2 == 'y' || c2 == 'Y') {
-        std::cout << "Set new name: ";
-
+    if (size > 0) {
+        std::cout << "Press 1 - " << size << " to configure a door\n";
+        std::cout << "Press '0' to go back to the menu\n";
+        std::cin >> c;
+        if (c != 0) {
+            std::cout << "Press '1' for name change on " << doorList[c - 1]->get_name() << std::endl;
+            std::cout << "Press '2' to change door position, Currently: " << (doorList[c - 1]->get_pos() == true ? "Open" : "Closed") << std::endl;
+            std::cout << "Press '3' for both options\n";
+            std::cout << "Press '0' to return to main menu\n";
+            std::cin >> c2;
+            if (c2 == 1 || c2 == 3) {
+                std::cout << "Set new name: ";
+                std::cin >> n_name;
+                doorList[c - 1]->set_name(n_name);
+            }
+            if (c2 == 2 || c2 == 3) {
+                std::cout << "Set Position ('Y' = Open \/ 'N' = Closed): ";
+                std::cin >> c3;
+                if (c3 == 'Y' || c3 == 'y') {
+                    doorList[c - 1]->set_pos(Position::On);
+                }
+                else if (c3 == 'N' || c3 == 'n') {
+                    doorList[c - 1]->set_pos(Position::Off);
+                }
+                else
+                {
+                    std::cout << "Invalid input, no change in position\n";
+                }
+                doorList[c - 1]->print_out();
+            }
+        }
     }
-    doorList[c]->set_pos();
-
 }
 
 void Room::configure_light() {
-    std::cout << "configure light\n";
+    std::cout << "configure light...\n";
+    int c;
+    int c2;
+    char c3;
+    int c4;
+    std::string n_name;
+    int size = lightList.size();
+    print_light(1);
+    if (size > 0) {
+        std::cout << "Press 1 - " << size << " to configure a light\n";
+        std::cout << "Press '0' to go back to main menu\n";
+        std::cin >> c;
+        if (c != 0) {
+            std::cout << "Press '1' for name change on " << lightList[c - 1]->get_name() << std::endl;
+            std::cout << "Press '2' to change light status, Currently: " << (lightList[c - 1]->get_pos() == true ? "On" : "Off") << std::endl;
+            std::cout << "Press '3' to change dimming percentage\n";
+            if (lightList[c - 1]->l_get_dig() == true) {
+                std::cout << "--- This light is not dimmable ---\n";
+            }
+            std::cout << "Press '4' for all options\n";
+            std::cout << "Press '0' to return to main menu\n";
+            std::cin >> c2;
+            if (c2 == 1 || c2 == 4) {
+                std::cout << "Set new name: ";
+                std::cin >> n_name;
+                lightList[c - 1]->set_name(n_name);
+            }
+            if (c2 == 2 || c2 == 4) {
+                std::cout << "Set position ('Y' = On \/ 'N' = Off): ";
+                std::cin >> c3;
+                if (c3 == 'Y' || c3 == 'y') {
+                    lightList[c - 1]->set_pos(Position::On);
+                }
+                else if (c3 == 'N' || c3 == 'n') {
+                    lightList[c - 1]->set_pos(Position::Off);
+                }
+                else
+                {
+                    std::cout << "Invalid input, no change in status\n";
+                }
+            }
+            if ((c2 == 3 || c2 == 4) && !lightList[c - 1]->l_get_dig()) {
+                std::cout << "Set new dimming percentage: ";
+                std::cin >> c4;
+                lightList[c - 1]->l_set_val(c4);
+            }
+            lightList[c - 1]->print_out();
+        }
+    }
 }
 
 void Room::configure_heater() {
-    std::cout << "configure heater\n";
+    std::cout << "configure heater...\n";
+    int c;
+    int c2;
+    char c3;
+    int c4;
+    std::string n_name;
+    int size = heaterList.size();
+    print_heater(1);
+    if (size > 0) {
+        std::cout << "Press 1 - " << size << " to configure a heater\n";
+        std::cout << "Press '0' to go back to main menu\n";
+        std::cin >> c;
+        if (c != 0) {
+            std::cout << "Press '1' for name change on " << heaterList[c - 1]->get_name() << std::endl;
+            std::cout << "Press '2' to change heater status, Currently: " << (heaterList[c - 1]->get_pos() == true ? "On" : "Off") << std::endl;
+            std::cout << "Press '3' to change temperature (\370C)\n";
+            std::cout << "Press '4' for all options\n";
+            std::cout << "Press '0' else to return to main menu\n";
+            std::cin >> c2;
+            if (c2 == 1 || c2 == 4) {
+                std::cout << "Set new name: ";
+                std::cin >> n_name;
+                heaterList[c - 1]->set_name(n_name);
+            }
+            if (c2 == 2 || c2 == 4) {
+                std::cout << "Set position ('Y' = On \/ 'N' = Off): ";
+                std::cin >> c3;
+                if (c3 == 'Y' || c3 == 'y') {
+                    heaterList[c - 1]->set_pos(Position::On);
+                }
+                else if (c3 == 'N' || c3 == 'n') {
+                    heaterList[c - 1]->set_pos(Position::Off);
+                }
+                else
+                {
+                    std::cout << "Invalid input, no change in status\n";
+                }
+            }
+            if (c2 == 3 || c2 == 4) {
+                std::cout << "Set new temperature (\370C): ";
+                std::cin >> c4;
+                heaterList[c - 1]->set_temperature(c4);
+            }
+            heaterList[c - 1]->print_out();
+        }
+    }
 }
 
 void Room::configure_coffee() {
-    std::cout << "configure coffee\n";
+    std::cout << "configure coffee...\n";
+    int c;
+    int c2;
+    char c3;
+    int c4;
+    char c5;
+    int c6;
+    std::string n_name;
+    int size = coffeeList.size();
+    print_coffee(1);
+    if (size > 0) {
+        std::cout << "Press 1 - " << size << " to configure a coffee machine\n";
+        std::cout << "Press '0' to go back to main menu\n";
+        std::cin >> c;
+        if (c != 0) {
+            std::cout << "Press '1' for name change on " << coffeeList[c - 1]->get_name() << std::endl;
+            std::cout << "Press '2' to change coffee machine status, Currently: " << (coffeeList[c - 1]->get_pos() == true ? "On" : "Off") << std::endl;
+            std::cout << "Press '3' to change the amount of cups of coffee\n";
+            std::cout << "Press '4' change status of daily coffee time, Currently: " << (coffeeList[c - 1]->c_get_daily() ? "On" : "Off") << "\n";
+            std::cout << "Press '5' to change coffe time\n";
+            std::cout << "Press '6' for all options\n";
+            std::cout << "Press '0' else to return to main menu\n";
+            std::cin >> c2;
+            if (c2 == 1 || c2 == 6) {
+                std::cout << "Set new name: ";
+                std::cin >> n_name;
+                coffeeList[c - 1]->set_name(n_name);
+            }
+            if (c2 == 2 || c2 == 6) {
+                std::cout << "Set position ('Y' = On \/ 'N' = Off): ";
+                std::cin >> c3;
+                if (c3 == 'Y' || c3 == 'y') {
+                    coffeeList[c - 1]->set_pos(Position::On);
+                }
+                else if (c3 == 'N' || c3 == 'n') {
+                    coffeeList[c - 1]->set_pos(Position::Off);
+                }
+                else
+                {   std::cout << "Invalid input, no change in status\n";  }
+            }
+            if (c2 == 3 || c2 == 6) {
+                std::cout << "Set new amount of cups: ";
+                std::cin >> c4;
+                coffeeList[c - 1]->c_set_val(c4);
+            }
+            if (c2 == 4 || c2 == 6) {
+                std::cout << "Set daily coffe  ('Y' = On \/ 'N' = Off): ";
+                std::cin >> c5;
+                if (c5 == 'Y' || c5 == 'y') {
+                    coffeeList[c - 1]->c_set_daily(true);
+                }
+                else if (c5 == 'N' || c5 == 'n') {
+                    coffeeList[c - 1]->c_set_daily(false);
+                }
+            }
+            if (c2 == 5 || c2 == 6) {
+                std::cout << "Set new time for daily coffee: ";
+                std::cin >> c6;
+                coffeeList[c - 1]->set_coffe_time(c6);
+            }
+            coffeeList[c - 1]->print_out();
+        }
+    }
+    else { std::cout << "There are no coffe machines in this room!\n"; }
 }
 
 void Room::quick_door(std::string name, int id, Position openClosed) {

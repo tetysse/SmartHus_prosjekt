@@ -116,14 +116,14 @@ int main()
             if (val3 == 1) {
                 new_r->configure_door();
             }
-            else if (val == 2) {
+            else if (val3 == 2) {
                 new_r->configure_light();
             }
-            else if (val == 3) {
+            else if (val3 == 3) {
                 new_r->configure_heater();
             }
-            else if (val == 4) {
-                new_r->delete_coffee();
+            else if (val3 == 4) {
+                new_r->configure_coffee();
             }
             else if (val3 == 9) {
                 menu = 0;

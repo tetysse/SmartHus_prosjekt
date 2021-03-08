@@ -9,6 +9,11 @@ std::string Light::print_out() {
 	}
 	else { temp = "Off"; }
 	std::cout << "\tCurrently: " << temp;
-	std::cout << "\tLight: \%: " << (temp == "On" ? l_val : 0) << std::endl;
+	if (l_dig == false) {
+		std::cout << "\tLight: \%: " << (temp == "On" ? l_val : 0) << std::endl;
+	}
+	else {
+		std::cout << "Light is not dimmable\n";
+	}
 	return "Light";
 }

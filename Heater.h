@@ -14,6 +14,7 @@ public:
 	Heater(std::string name, int id, int status, Position pos) : Instrument(name, id, pos)
 	{	h_val = status;	};
 	int get_temperature() { return h_val; };
+	void set_temperature(int val) { h_val = val; };
 	std::string print_out();
 	~Heater() {};
 };
