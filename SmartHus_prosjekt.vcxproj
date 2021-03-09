@@ -142,6 +142,7 @@
     <ClCompile Include="Coffee_Machine.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Heater.cpp" />
+    <ClCompile Include="House.cpp" />
     <ClCompile Include="Instrument.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Room.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="Coffee_Machine.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="Heater.h" />
+    <ClInclude Include="House.h" />
     <ClInclude Include="Instrument.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Room.h" />

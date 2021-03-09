@@ -251,114 +251,122 @@ void Room::add_heater(int id) {
     heaterList.push_back(new_l);
 }
 
-void Room::delete_door() {
+void Room::delete_door(int choice) {
     int c;
     int size = doorList.size();
     print_door(1);
     if (size > 0) {
-        std::cout << "Press 1 - " << size << " to remove a door\n";
-        std::cout << "Press \'" << size + 1 << "\' to remove all\n";
-        std::cout << "Press \'0\' to go back to the menu\n";
-        std::cin >> c;
-        if (c != size + 1) {
-            for (int i = 0; i < size; i++) {
-                if (c == i + 1) {
-                    doorList[i]->~Door();
-                    doorList.erase(doorList.begin() + i);
+        if (choice != 1) {
+            std::cout << "Press 1 - " << size << " to remove a door\n";
+            std::cout << "Press '0' to go back to the menu\n";
+            std::cin >> c;
+            if (c != size + 1) {
+                for (int i = 0; i < size; i++) {
+                    if (c == i + 1) {
+                        doorList[i]->~Door();
+                        doorList.erase(doorList.begin() + i);
+                    }
                 }
             }
         }
-        else if (c == size + 1) {
+        if (choice == 1 || c == size + 1) {
             for (int i = 0; i < doorList.size(); i++)
             {
                 doorList[i]->~Door();
             }
             doorList.clear();
+            std::cout << "Removing all the doors...\n";
         }
     }
 }
 
 
-void Room::delete_light() {
+void Room::delete_light(int choice) {
     int c;
     int size = lightList.size();
     print_light(1);
     if (size > 0) {
-        std::cout << "Press 1 - " << size << " to remove a light\n";
-        std::cout << "Press \'" << size + 1 << "\' to remove all\n";
-        std::cout << "Press \'0\' to go back to the menu\n";
-        std::cin >> c;
-        if (c != size + 1) {
-            for (int i = 0; i < size; i++) {
-                if (c == i + 1) {
-                    lightList[i]->~Light();
-                    lightList.erase(lightList.begin() + i);
+        if (choice != 1) {
+            std::cout << "Press 1 - " << size << " to remove a light\n";
+            std::cout << "Press '0' to go back to the menu\n";
+            std::cin >> c;
+            if (c != size + 1 && choice != 1) {
+                for (int i = 0; i < size; i++) {
+                    if (c == i + 1) {
+                        lightList[i]->~Light();
+                        lightList.erase(lightList.begin() + i);
+                    }
                 }
             }
         }
-        else if (c == size + 1) {
+        if (choice == 1 || c == size + 1) {
             for (int i = 0; i < lightList.size(); i++) 
             {   lightList[i]->~Light(); }
             lightList.clear();
+            std::cout << "Removing all the lights...\n";
         }
     }
 }
 
-void Room::delete_heater() {
+void Room::delete_heater(int choice) {
     int c;
     int size = heaterList.size();
     print_heater(1);
     if (size > 0) {
-        std::cout << "Press 1 - " << size << " to remove a heater\n";
-        std::cout << "Press \'" << size + 1 << "\' to remove all\n";
-        std::cout << "Press \'0\' to go back to the menu\n";
-        std::cin >> c;
-        if (c != size + 1) {
-            for (int i = 0; i < size; i++) {
-                if (c == i + 1) {
-                    heaterList[i]->~Heater();
-                    heaterList.erase(heaterList.begin() + i);
+        if (choice != 1) {
+            std::cout << "Press 1 - " << size << " to remove a heater\n";
+            std::cout << "Press '0' to go back to the menu\n";
+            std::cin >> c;
+            if (c != size + 1) {
+                for (int i = 0; i < size; i++) {
+                    if (c == i + 1) {
+                        heaterList[i]->~Heater();
+                        heaterList.erase(heaterList.begin() + i);
+                    }
                 }
             }
         }
-        else if (c == size + 1) {
+        else if (choice == 1 || c == size + 1) {
             for (int i = 0; i < heaterList.size(); i++)
             {
                 heaterList[i]->~Heater();
             }
             heaterList.clear();
+            std::cout << "Removing all the heaters...\n";
         }
     }
 }
 
-void Room::delete_coffee() {
+void Room::delete_coffee(int choice) {
     int c;
     int size = coffeeList.size();
     print_coffee(1);
     if (size > 0) {
-        std::cout << "Press 1 - " << size << " to remove a coffee machine\n";
-        std::cout << "Press \'" << size + 1 << "\' to remove all\n";
-        std::cout << "Press \'0\' to go back to the menu\n";
-        std::cin >> c;
-        if (c != size + 1) {
-            for (int i = 0; i < size; i++) {
-                if (c == i + 1) {
-                    coffeeList[i]->~Coffee_Machine();
-                    coffeeList.erase(coffeeList.begin() + i);
+        if (choice != 1) {
+            std::cout << "Press 1 - " << size << " to remove a coffee machine\n";
+            std::cout << "Press '0' to go back to the menu\n";
+            std::cin >> c;
+            if (c != size + 1) {
+                for (int i = 0; i < size; i++) {
+                    if (c == i + 1) {
+                        coffeeList[i]->~Coffee_Machine();
+                        coffeeList.erase(coffeeList.begin() + i);
+                    }
                 }
             }
         }
-        else if (c == size + 1) {
+        else if (choice == 1) {
             for (int i = 0; i < coffeeList.size(); i++)
             {
                 coffeeList[i]->~Coffee_Machine();
             }
             coffeeList.clear();
+            std::cout << "Removing all the coffee machines...\n";
         }
     }
 }
 
-void Room::configure_door() {
+void Room::configure_door(int choice) {
     int c;
     int c2;
     char c3;
@@ -400,7 +408,7 @@ void Room::configure_door() {
     }
 }
 
-void Room::configure_light() {
+void Room::configure_light(int choice) {
     std::cout << "configure light...\n";
     int c;
     int c2;
@@ -452,7 +460,7 @@ void Room::configure_light() {
     }
 }
 
-void Room::configure_heater() {
+void Room::configure_heater(int choice) {
     std::cout << "configure heater...\n";
     int c;
     int c2;
@@ -501,7 +509,7 @@ void Room::configure_heater() {
     }
 }
 
-void Room::configure_coffee() {
+void Room::configure_coffee(int choice) {
     std::cout << "configure coffee...\n";
     int c;
     int c2;

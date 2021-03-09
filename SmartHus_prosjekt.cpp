@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <thread>
+#include "House.h"
 #include "Room.h"
 #include "Instrument.h"
 #include "Coffee_Machine.h"
@@ -38,6 +39,7 @@ void remove_instrument_menu(int& c) {
     std::cout << "Press '2' to remove a LIGHT\n";
     std::cout << "Press '3' to remove a HEATER\n";
     std::cout << "Press '4' to remove a COFFEE MACHINE\n";
+    std::cout << "Press '5' to remove ALL instruments in the room";
     std::cout << "Press '9' to go back to room menu\n";
     std::cout << "----------------------------------------------------------------\n";
     std::cin >> c;
@@ -63,7 +65,9 @@ int main()
     int val;
     int val2 = 0;
     int val3 = 0;
+    char del_all;
     int menu = 0;
+    int rem_n;
     while (run) {
         if (menu == 0) {
             std::thread t_menu(room_menu, std::ref(val));
@@ -92,38 +96,66 @@ int main()
                 run = false;
             }
         } 
-        if (val2 != 0) {
+        if (val2 != 0 && val2 != 5) {
             menu++;
-            if (val2 == 1) {   
-                new_r->delete_door(); 
+            std::cout << "Do you want to delete all the ";
+            if (val2 == 1) {
+                std::cout << "doors";
             }
             else if (val2 == 2) {
-                new_r->delete_light();
+                std::cout << "lights"; 
             }
             else if (val2 == 3) {
-                new_r->delete_heater();
+                std::cout << "heaters";
             }
             else if (val2 == 4) {
-                new_r->delete_coffee();
+                std::cout << "coffe machines";
+            }
+            std::cout << " in the room?(Y/N) ";
+            std::cin >> del_all;
+            if (del_all == 'Y' || del_all == 'y') {
+                rem_n = 1;
+            }
+            else {
+                rem_n = 0;
+            }
+            if (val2 == 1) {   
+                new_r->delete_door(rem_n);
+            }
+            else if (val2 == 2) {
+                new_r->delete_light(rem_n);
+            }
+            else if (val2 == 3) {
+                new_r->delete_heater(rem_n);
+            }
+            else if (val2 == 4) {
+                new_r->delete_coffee(rem_n);
             }
             else if (val2 == 9) {
                 menu = 0;
             }
             val2 = 0;
         }
+        else if (val2 == 5) {
+            std::cout << "Removing all instruments in the room..\n";
+            new_r->delete_door(1);
+            new_r->delete_light(1);
+            new_r->delete_heater(1);
+            new_r->delete_coffee(1);
+        }
         if (val3 != 0) {
             menu++;
             if (val3 == 1) {
-                new_r->configure_door();
+                new_r->configure_door(0);
             }
             else if (val3 == 2) {
-                new_r->configure_light();
+                new_r->configure_light(0);
             }
             else if (val3 == 3) {
-                new_r->configure_heater();
+                new_r->configure_heater(0);
             }
             else if (val3 == 4) {
-                new_r->configure_coffee();
+                new_r->configure_coffee(0);
             }
             else if (val3 == 9) {
                 menu = 0;
