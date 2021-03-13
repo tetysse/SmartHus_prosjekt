@@ -22,6 +22,7 @@ public:
     Room(std::string name, int id) { r_name = name, r_id = id; };
     void add_instrument(int id, int i_val);
     void add_door(int id);
+    void add_door(std::string name, std::string pos);
     void quick_door(std::string name, int id, Position openClosed);
     void quick_light(std::string name, int id, int val, Position onOff, bool digital);
     void quick_coffee(std::string name, int id, int val, Position onOff, int time, bool daily);
@@ -50,7 +51,9 @@ public:
     void quick_start(int h_id, int roomsize);
     std::string r_get_name() { return r_name; };
     int r_get_id() { return r_id; };
-    ~Room() {};
+    void add_instrument(std::string name);
+    std::vector<std::string> split(const std::string& str, const std::string& delim);
+    ~Room() { delete_all_instruments(); };
 };
 
 

@@ -1,5 +1,6 @@
 #include "Room.h"
 
+
 void n_space_management(int size) {
     for (int i = 0; i < 12 - size; i++)
     {   std::cout << " ";  }
@@ -163,6 +164,12 @@ void Room::add_door(int id) {
     Door* new_d = new Door(name, id, d_st);
     doorList.push_back(new_d);
     new_d->print_out();
+}
+
+void Room::add_door(std::string name, std::string pos)
+{
+    Door* new_d = new Door(name, instrument_count(5) + 1, pos=="Off" ? Position::Off : Position::On);
+    doorList.push_back(new_d);
 }
 
 void Room::add_light(int id) {
@@ -692,6 +699,64 @@ int Room::instrument_count(int c) {
     }
 }
 
+void Room::add_instrument(std::string name)
+{
+    //num_instruments++;
+    std::size_t pos = name.find('(');
+    std::size_t posend = name.find(')');
+    std::string instrumentType = name.substr(pos, (posend - pos) + 1);
+    std::string instrumentName = name.substr(0, pos);
+
+    if (instrumentType == "(Coffe)")
+    {
+        const std::string settings_string = name.substr(posend + 1, name.size());
+        std::vector<std::string> settings = split(settings_string, " ");
+        
+        Coffee_Machine* new_c = new Coffee_Machine(instrumentName, instrument_count(5) + 1, std::stoi(settings[1]),
+                                                   settings[2] == "Off" ? Position::Off : Position::On, std::stoi(settings[3]),
+                                                   settings[4] == "daily" ? true : false);
+        coffeeList.push_back(new_c);
+    }
+    else if (instrumentType == "(Light)")
+    {
+        const std::string settings_string = name.substr(posend + 1, name.size());
+        std::vector<std::string> settings = split(settings_string, " ");
+    	
+        Light* new_l = new Light(instrumentName, instrument_count(5) + 1, std::stoi(settings[1]), settings[2] == "Off" ? Position::Off : Position::On, settings[3] == "digital" ? true : false);
+        lightList.push_back(new_l);
+        //new_instrument = new Oven<int>(instrumentName, num_instruments);// name, num_instruments);
+    }
+    else if (instrumentType == "(Heater)")
+    {
+        const std::string settings_string = name.substr(posend + 1, name.size());
+        std::vector<std::string> settings = split(settings_string, " ");
+    	
+        Heater* new_l = new Heater(instrumentName, instrument_count(5) + 1, std::stoi(settings[1]), settings[2] == "Off" ? Position::Off : Position::On);
+        heaterList.push_back(new_l);
+    }
+    else
+    {
+        std::cout << "Cannot find instrument type: " << instrumentType << std::endl;//<< "<Enter> to continue"
+    }
+    
+}
+
+//Split code from https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+std::vector<std::string> Room::split(const std::string& str, const std::string& delim)
+{
+    std::vector<std::string> tokens;
+    size_t prev = 0, pos = 0;
+    do
+    {
+        pos = str.find(delim, prev);
+        if (pos == std::string::npos) pos = str.length();
+        std::string token = str.substr(prev, pos - prev);
+        //if (!token.empty())
+        tokens.push_back(token);
+        prev = pos + delim.length();
+    } while (pos < str.length() && prev < str.length());
+    return tokens;
+}
 
 // BELOW  IS FUNCTIONS FOR TESTING!
 
@@ -717,15 +782,16 @@ void Room::quick_heater(std::string name, int id, int val, Position onOff) {
 void Room::quick_start(int h_id, int roomsize) {
     int temp = h_id * roomsize * 200;
     std::cout << "Adding 4 doors, 4 lights, coffe machine and 2 heaters...\n";
-    quick_door("Hoved", temp + 1,      Position::On );
-    quick_door("Side",  temp + 2,      Position::Off);
-    quick_door("Bak",   temp + 3,      Position::Off);
-    quick_door("Skap",  temp + 4,      Position::On );
-    quick_light("Tak",  temp + 5, 13,  Position::On,  true  );
-    quick_light("Vegg", temp + 6, 17,  Position::Off, false );
-    quick_light("Bord", temp + 7, 25,  Position::Off, true  );
-    quick_light("Gulv", temp + 8, 90,  Position::On,  false );
+    quick_door("Hoved", temp + 1, Position::On);
+    quick_door("Side", temp + 2, Position::Off);
+    quick_door("Bak", temp + 3, Position::Off);
+    quick_door("Skap", temp + 4, Position::On);
+    quick_light("Tak", temp + 5, 13, Position::On, true);
+    quick_light("Vegg", temp + 6, 17, Position::Off, false);
+    quick_light("Bord", temp + 7, 25, Position::Off, true);
+    quick_light("Gulv", temp + 8, 90, Position::On, false);
     quick_coffee("Mocca", temp + 9, 4, Position::On, 8, true);
-    quick_heater("Radiator", temp + 10, 25, Position::On    );
+    quick_heater("Radiator", temp + 10, 25, Position::On);
     quick_heater("Varmekabler", temp + 11, 32, Position::Off);
 }
+

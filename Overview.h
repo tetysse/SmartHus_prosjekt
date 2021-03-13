@@ -4,7 +4,13 @@
 #include <string>
 #include <vector>
 #include <thread>
+#include <fstream>
+#include <direct.h>
+#include<limits.h>
+
 #include "House.h"
+#include "Room.h"
+
 
 class Overview
 {
@@ -18,6 +24,9 @@ public:
 	void remove_house();
 	void change_address();
 	void configure_house();
+	void read_config_file();
+	void add_instruments(std::string line, Room* room);
+	std::vector<std::string> split(const std::string& str, const std::string& delim);
 	~Overview() {};
 };
 

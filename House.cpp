@@ -31,6 +31,7 @@ void House::add_room() {
 		}
 	}
 }
+
 void print_inst_type(int c, std::string &temp) {
 	if (c == 1) {
 		temp = "door";
@@ -90,7 +91,7 @@ void House::configure_room() {
 			std::cout << "31: Add a coffee machine\n";
 			std::cout << "32: Remove a coffee machine\n";
 			std::cout << "33: Configure a coffee machine\n";
-			std::cout << "34: Turn on/off all coffee machines";
+			std::cout << "34: Turn on/off all coffee machines\n";
 			std::cout << "9:  Print room\n";
 			std::cout << "0:  Return to main menu\n";
 			std::cout << "----------------------------------------------------------------\n";
@@ -155,14 +156,14 @@ void House::remove_room(int house_rem) {
 		}
 		std::cin >> c;
 		std::cout << "Removing a room and all instruments...\n";
-		roomList[c - 1]->delete_all_instruments();
+		//roomList[c - 1]->delete_all_instruments();
 		roomList[c - 1]->~Room();
 		roomList.erase(roomList.begin() + c - 1);
 		std::cout << "----------------------------------------------------------------\n";
 	}
 	else if (house_rem == 1){
 		for (int j = 0; j < roomList.size(); j++) {
-			roomList[j]->delete_all_instruments();
+			//roomList[j]->delete_all_instruments();
 			roomList[j]->~Room();
 		}
 		roomList.clear();
@@ -178,6 +179,14 @@ void House::print_out(int c) {
 	for (int i = 0; i < roomList.size(); i++) {
 		std::cout << "                   Room: " << roomList[i]->r_get_name() << std::endl;
 		std::cout << "----------------------------------------------------------------\n";
+		for (Person* pers : person_list)
+		{
+			if (pers->get_room() == roomList[i])
+			{
+				std::cout << "  ";
+				pers->print();
+			}
+		}
 		roomList[i]->print_door(0);
 		roomList[i]->print_light(0);
 		roomList[i]->print_heater(0);
@@ -185,6 +194,11 @@ void House::print_out(int c) {
 		std::cout << "----------------------------------------------------------------\n";
 	}
 
+}
+
+Room* House::get_room(int a)
+{
+	return roomList[a];
 }
 
 void House::all_instruments(int house_c){

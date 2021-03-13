@@ -1,0 +1,17 @@
+House
+Andebyveien 1
+Kjokken;Soverom;Bad
+KaffeMaskin(Kaffetrakter),lys2(Lys),lys3(Lys);B(Ovn),abc(Lys),abc2(Lys),abc3(Lys);lys1(Lys)
+Person;Donald Duck,21,77,Soverom
+Person;Anders And,29,42,Kjokken
+
+House
+Andebyveien 2
+Pengebinge
+TestLys(Lys)
+
+House
+Andebyveien 3
+
+
+
