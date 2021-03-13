@@ -167,7 +167,12 @@ void Overview::read_config_file()
                     	if(!(pos == posend))
                     	{
                             std::vector<std::string> settings = split(door, " ");
-                            room->add_door(settings[0], settings[1]);
+                    		
+                            for (int i = 0; i < settings.size(); i+= 2)
+                            {
+                                room->add_door(settings[i], settings[i+1]);
+                            }
+                    		
                     	}
                         
                         house->add_room(room);
@@ -239,4 +244,104 @@ std::vector<std::string> Overview::split(const std::string& str, const std::stri
         prev = pos + delim.length();
     } while (pos < str.length() && prev < str.length());
     return tokens;
+}
+
+
+std::string Overview::getTypeAndValues(Instrument * instrument)
+{
+    if (typeid(*instrument) == typeid(Light))
+    {
+        Light* light = static_cast<Light*>(instrument);
+        return "(Light) " + (std::to_string(light->l_get_status())) + (instrument->get_pos() == false ? " Off " : " On ") + (light->l_get_dig() == false ? "analog" : "digital");
+    }
+    else if (typeid(*instrument) == typeid(Heater))
+    {
+        Heater* heater = static_cast<Heater*>(instrument);
+        return "(Heater) " + std::to_string(heater->get_temperature()) + (instrument->get_pos() == false ? " Off " : " On ");
+
+    }
+    else if (typeid(*instrument) == typeid(Coffee_Machine))
+    {
+        Coffee_Machine* cm = static_cast<Coffee_Machine*>(instrument);
+        return "(Coffe) " + std::to_string(cm->c_get_status()) + (instrument->get_pos() == false ? " Off " : " On ") + std::to_string(cm->c_get_time()) + " " + (cm->c_get_daily() == true ? "daily" : "NA");
+    }
+}
+
+
+void Overview::saveToFile()
+{
+    //Code copied from https://www.codespeedy.com/how-to-get-current-directory-in-cpp/
+    const int PATH_MAX = 500;
+    char buff[PATH_MAX];
+    _getcwd(buff, PATH_MAX);
+    std::string current_working_dir(buff);
+    //std::cout << current_working_dir << std::endl;
+    std::string output = current_working_dir + "\\Input\\Config.txt";
+    //std::cout << input << std::endl;
+    std::ofstream outputFile(output);
+
+    // Write to the file
+    for (int i = 0; i < houseList.size(); i++)
+    {
+        outputFile << "House\n";
+        outputFile << houseList[i]->h_get_name() << "\n";
+        std::string rooms = "";
+        std::string instruments = "";
+        for (int j = 0; j < houseList[i]->get_rooms().size(); j++)
+        {
+            rooms += houseList[i]->get_rooms()[j]->r_get_name();
+        	if(!houseList[i]->get_rooms()[j]->get_doors().empty())
+        	{
+                rooms += "(";
+	            for (Door* door : houseList[i]->get_rooms()[j]->get_doors())
+	            {
+                    rooms += door->get_name() + " " + (door->get_pos() == false ? "Off " : "On ");
+	            }
+                rooms = rooms.substr(0, rooms.size() - 1);
+        		rooms += ")";
+        	}
+            rooms += ";";
+            for (int k = 0; k < houseList[i]->get_rooms()[j]->get_all_instruments().size(); k++)
+            {
+                Instrument* instrument = houseList[i]->get_rooms()[j]->get_all_instruments()[k];
+                instruments += instrument->get_name() + getTypeAndValues(instrument) + ",";
+            	
+            }
+            instruments = instruments.substr(0, instruments.size() - 1);
+            instruments += ";";
+        }
+        outputFile << rooms.substr(0, rooms.size() - 1) << "\n";
+        outputFile << instruments.substr(0, instruments.size() - 1) << "\n";
+        for (int a = 0; a < houseList[i]->get_persons().size(); a++)
+        {
+            Person* person = houseList[i]->get_persons()[a];
+            outputFile << "Person;" << person->getPersonName() << "," << person->getPrefferedTemperature() << "," << person->getPrefferedLightStrength() << "," << person->get_room()->r_get_name() << "\n";
+        }
+        outputFile << "\n";
+    }
+
+    // Close the file
+    outputFile.close();
+}
+
+void Overview::set_time(int* time_)
+{
+    //time = *time_;
+    //CoffeMachine* cm = static_cast<CoffeMachine*>(house_list[0]->get_rooms()[0]->get_instrument(0));
+    //if (time < 10)
+    //{
+    //    cm->turn_on();
+    //}
+    //else
+    //{
+    //    cm->turn_off();
+    //}
+    //if (time > 21 || time < 8)
+    //{
+    //    house_list[0]->set_all_lights(10);
+    //}
+    //else
+    //{
+    //    house_list[0]->set_all_lights(70);
+    //}
 }

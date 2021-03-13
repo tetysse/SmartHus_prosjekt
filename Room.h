@@ -23,6 +23,8 @@ public:
     void add_instrument(int id, int i_val);
     void add_door(int id);
     void add_door(std::string name, std::string pos);
+    std::vector<Door*> get_doors() { return doorList; }
+    std::vector<Instrument*> get_all_instruments();
     void quick_door(std::string name, int id, Position openClosed);
     void quick_light(std::string name, int id, int val, Position onOff, bool digital);
     void quick_coffee(std::string name, int id, int val, Position onOff, int time, bool daily);

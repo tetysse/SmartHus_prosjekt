@@ -27,6 +27,9 @@ public:
 	void read_config_file();
 	void add_instruments(std::string line, Room* room);
 	std::vector<std::string> split(const std::string& str, const std::string& delim);
+	std::string getTypeAndValues(Instrument* instrument);
+	void saveToFile();
+	void set_time(int* time_);
 	~Overview() {};
 };
 

@@ -760,6 +760,16 @@ std::vector<std::string> Room::split(const std::string& str, const std::string& 
 
 // BELOW  IS FUNCTIONS FOR TESTING!
 
+std::vector<Instrument*> Room::get_all_instruments()
+{
+   std::vector<Instrument*> result;
+   result.insert(result.end(), lightList.begin(), lightList.end());
+   result.insert(result.end(), heaterList.begin(), heaterList.end());
+   result.insert(result.end(), coffeeList.begin(), coffeeList.end());
+	
+   return result;
+}
+
 void Room::quick_door(std::string name, int id, Position openClosed) {
     Door* new_d = new Door(name, id, openClosed);
     doorList.push_back(new_d);

@@ -24,7 +24,7 @@ bool menu = false;
 void main_menu() {
     std::cout << "----------------------------------------------------------------\n";
     std::cout << "Press '1' to add a new house\n";
-    std::cout << "Press '2' to configure a room or instrument in  house\n";
+    std::cout << "Press '2' to configure a room or instrument in house\n";
     std::cout << "Press '3' remove a house\n";
     std::cout << "Press '4' to rename the address of a house\n";
     std::cout << "Press '5' to read from file\n";
@@ -39,7 +39,6 @@ void doWork(Overview* new_o)
 {
     menu = true;
     main_menu();
-    //std::cin.ignore();
     /*std::string input;
     std::getline(std::cin, input);*/
 
@@ -63,6 +62,7 @@ void doWork(Overview* new_o)
         new_o->print_houses();
     }
     else if (val == 6) {
+        new_o->saveToFile();
         // to be continued
     }
     else if (val == 7) {
@@ -103,6 +103,7 @@ void simulateClock(int n, Overview* ov)
     {
         if (!run)
         {
+            system("CLS"); //to clear console
             doWork(ov);
             run = true;
         }

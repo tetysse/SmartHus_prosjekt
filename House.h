@@ -18,7 +18,8 @@ protected:
 public:
 	House(std::string name, int id) { h_name = name, h_id = id; };
 	void h_set_name(std::string name) { h_name = name; }
-	std::vector<Room*> get_rooms() { return roomList; };
+	std::vector<Room*> get_rooms() { return roomList; }
+	std::vector<Person*>  get_persons() { return person_list; };
 	void h_set_id(int id) { h_id = id; };
 	void configure_room();
 	void add_room();
@@ -31,7 +32,6 @@ public:
 	void add_room(Room* r) { roomList.push_back(r); };
 	Room* get_room(int a);
 	void add_person(Person* Person) {person_list.push_back(Person); };
-	std::vector<Person*> get_persons() { return person_list; };
 	~House() {};
 };
 
