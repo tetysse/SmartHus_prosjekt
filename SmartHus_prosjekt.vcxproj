@@ -145,6 +145,7 @@
     <ClCompile Include="House.cpp" />
     <ClCompile Include="Instrument.cpp" />
     <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Overview.cpp" />
     <ClCompile Include="Room.cpp" />
     <ClCompile Include="SmartHus_prosjekt.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="House.h" />
     <ClInclude Include="Instrument.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="Overview.h" />
     <ClInclude Include="Room.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

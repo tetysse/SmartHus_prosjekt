@@ -8,21 +8,23 @@ void n_space_management(int size) {
 void Room::print_door(int header) {
     bool digital_pos;
     std::string temp_n = "NA";
-    if (header == 1) {
-        std::cout << "----------------------------------------------------------------\n";
-        std::cout << "                          Doors\n";
-        std::cout << "----------------------------------------------------------------\n";
-    }
-    else { std::cout << "DOORS:\n"; }
-    for (int i = 0; i < doorList.size(); i++) {
-        digital_pos = doorList[i]->get_pos();
-        temp_n = doorList[i]->get_name();
-        std::cout << i+1 << ": Name: " << temp_n;
-        n_space_management(temp_n.size());
-        std::cout << "Position: " << (digital_pos == true ? "Open" : "Closed") << "\n";
-    }
-    if (doorList.size() == 0) {
-        std::cout << "There are no doors configured in this room!\n";
+    if (!(header == 2 && doorList.size() == 0)) {
+        if (header == 1) {
+            std::cout << "----------------------------------------------------------------\n";
+            std::cout << "                          Doors\n";
+            std::cout << "----------------------------------------------------------------\n";
+        }
+        else { std::cout << "DOORS:\n"; }
+        for (int i = 0; i < doorList.size(); i++) {
+            digital_pos = doorList[i]->get_pos();
+            temp_n = doorList[i]->get_name();
+            std::cout << i + 1 << ": Name: " << temp_n;
+            n_space_management(temp_n.size());
+            std::cout << "Position: " << (digital_pos == true ? "Open" : "Closed") << "\n";
+        }
+        if (doorList.size() == 0) {
+            std::cout << "There are no doors configured in this room!\n";
+        }
     }
 }
 
@@ -30,31 +32,34 @@ void Room::print_light(int header) {
     bool digital_pos = false;
     int analog_pos = 0;
     std::string temp_n = "NA";
-    if (header == 1) {
-        std::cout << "----------------------------------------------------------------\n";
-        std::cout << "                          Lights\n";
-        std::cout << "----------------------------------------------------------------\n";
-    }
-    else { std::cout << "LIGHTS:\n"; }
-    for (int i = 0; i < lightList.size(); i++) {
-        if (lightList[i] != NULL)
-        analog_pos = lightList[i]->l_get_status();
-        digital_pos = lightList[i]->get_pos();
-        temp_n = lightList[i]->get_name();
-        std::cout << i+1 << ": Name: " << temp_n;
-        n_space_management(temp_n.size());
-        std::cout << "Status: " << (digital_pos == true ? "On" : "Off");
-        if (digital_pos == true) { std::cout << ",  "; }
-        else { std::cout << ", "; }
-        if (lightList[i]->l_get_dig() == true) {
-            std::cout << "Light is not dimmable\n";
+    if (!(header == 2 && lightList.size() == 0))
+    {
+        if (header == 1) {
+            std::cout << "----------------------------------------------------------------\n";
+            std::cout << "                          Lights\n";
+            std::cout << "----------------------------------------------------------------\n";
         }
-        else {
-            std::cout << "Set point: " << analog_pos << " \%\n";
+        else { std::cout << "LIGHTS:\n"; }
+        for (int i = 0; i < lightList.size(); i++) {
+            if (lightList[i] != NULL)
+                analog_pos = lightList[i]->l_get_status();
+            digital_pos = lightList[i]->get_pos();
+            temp_n = lightList[i]->get_name();
+            std::cout << i + 1 << ": Name: " << temp_n;
+            n_space_management(temp_n.size());
+            std::cout << "Status: " << (digital_pos == true ? "On" : "Off");
+            if (digital_pos == true) { std::cout << ",  "; }
+            else { std::cout << ", "; }
+            if (lightList[i]->l_get_dig() == true) {
+                std::cout << "Light is not dimmable\n";
+            }
+            else {
+                std::cout << "Set point: " << analog_pos << " \%\n";
+            }
         }
-    }
-    if (lightList.size() == 0) {
-        std::cout << "There are no lights configured in this room!\n";
+        if (lightList.size() == 0) {
+            std::cout << "There are no lights configured in this room!\n";
+        }
     }
 }
 
@@ -62,26 +67,32 @@ void Room::print_heater(int header) {
     bool digital_pos;
     int analog_pos;
     std::string temp_n = "NA";
-    if (header == 1) {
-        std::cout << "----------------------------------------------------------------\n";
-        std::cout << "                          Heaters\n";
-        std::cout << "----------------------------------------------------------------\n";
-    }
-    else
-    {   std::cout << "HEATERS:\n";   }
-    for (int i = 0; i < heaterList.size(); i++) {
-        analog_pos = heaterList[i]->get_temperature();
-        digital_pos = heaterList[i]->get_pos();
-        temp_n = heaterList[i]->get_name();
-        std::cout << i+1 << ": Name: " << temp_n;
-        n_space_management(temp_n.size());
-        std::cout << "Currently: " << (digital_pos == true ? "On" : "Off");
-        if (digital_pos == true) { std::cout << ",  "; }
-        else { std::cout << ", "; }
-        std::cout << " Set point: " << analog_pos << " \370C\n";
-    }
-    if (heaterList.size() == 0) {
-        std::cout << "There are no heaters configured in this room!\n";
+    if (!(header == 2 && heaterList.size() == 0)) {
+        if (!(header == 2 && heaterList.size() == 0)) {
+            if (header == 1) {
+                std::cout << "----------------------------------------------------------------\n";
+                std::cout << "                          Heaters\n";
+                std::cout << "----------------------------------------------------------------\n";
+            }
+            else
+            {
+                std::cout << "HEATERS:\n";
+            }
+            for (int i = 0; i < heaterList.size(); i++) {
+                analog_pos = heaterList[i]->get_temperature();
+                digital_pos = heaterList[i]->get_pos();
+                temp_n = heaterList[i]->get_name();
+                std::cout << i + 1 << ": Name: " << temp_n;
+                n_space_management(temp_n.size());
+                std::cout << "Currently: " << (digital_pos == true ? "On" : "Off");
+                if (digital_pos == true) { std::cout << ",  "; }
+                else { std::cout << ", "; }
+                std::cout << " Set point: " << analog_pos << " \370C\n";
+            }
+            if (heaterList.size() == 0) {
+                std::cout << "There are no heaters configured in this room!\n";
+            }
+        }
     }
 }
 
@@ -89,35 +100,37 @@ void Room::print_coffee(int header) {
     bool digital_pos;
     int analog_pos;
     std::string temp_n = "NA";
-    if (header == 1) {
-        std::cout << "----------------------------------------------------------------\n";
-        std::cout << "                          Coffee Machine\n";
-        std::cout << "----------------------------------------------------------------\n";
-    }
-    else { std::cout << "COFFEE MACHINE:\n"; }
-    for (int i = 0; i < coffeeList.size(); i++) {
-        analog_pos = coffeeList[i]->c_get_status();
-        digital_pos = coffeeList[i]->get_pos();
-        temp_n = coffeeList[i]->get_name();
-        std::cout << i+1 << ": Name: " << temp_n;
-        n_space_management(temp_n.size());
-        std::cout << "Currently: " << (digital_pos == true ? "On" : "Off");
-        if (digital_pos == true) { std::cout << ",  "; }
-        else { std::cout << ", "; }
-        digital_pos = coffeeList[i]->c_get_daily();
-        std::cout << " Cups: " << analog_pos << ", ";
-        if (analog_pos > 9) { std::cout << " "; }
-        analog_pos = coffeeList[i]->c_get_time();
-        if (digital_pos == true)
-        {
-            std::cout << "Coffeetime: ";
-            if (analog_pos < 10) { std::cout << "0"; }
-            std::cout << analog_pos << ":00" << std::endl;
+    if (!(header == 2 && coffeeList.size() == 0)) {
+        if (header == 1) {
+            std::cout << "----------------------------------------------------------------\n";
+            std::cout << "                          Coffee Machine\n";
+            std::cout << "----------------------------------------------------------------\n";
         }
-        else { std::cout << "Coffeetime not active\n"; }
-    }
-    if (coffeeList.size() == 0) {
-        std::cout << "There are no coffee machines configured in this room!\n";
+        else { std::cout << "COFFEE MACHINE:\n"; }
+        for (int i = 0; i < coffeeList.size(); i++) {
+            analog_pos = coffeeList[i]->c_get_status();
+            digital_pos = coffeeList[i]->get_pos();
+            temp_n = coffeeList[i]->get_name();
+            std::cout << i+1 << ": Name: " << temp_n;
+            n_space_management(temp_n.size());
+            std::cout << "Currently: " << (digital_pos == true ? "On" : "Off");
+            if (digital_pos == true) { std::cout << ",  "; }
+            else { std::cout << ", "; }
+            digital_pos = coffeeList[i]->c_get_daily();
+            std::cout << " Cups: " << analog_pos << ", ";
+            if (analog_pos > 9) { std::cout << " "; }
+            analog_pos = coffeeList[i]->c_get_time();
+            if (digital_pos == true)
+            {
+                std::cout << "Coffeetime: ";
+                if (analog_pos < 10) { std::cout << "0"; }
+                std::cout << analog_pos << ":00" << std::endl;
+            }
+            else { std::cout << "Coffeetime not active\n"; }
+        }
+        if (coffeeList.size() == 0) {
+            std::cout << "There are no coffee machines configured in this room!\n";
+        }
     }
 }
 
@@ -132,17 +145,6 @@ void Room::print_room(int header) {
     print_light(header);
     print_heater(header);
     print_coffee(header);
-}
-
-void Room::add_instrument(int id, int i_val) {
-    if (i_val == 1)
-    {   add_door(id);    }
-    else if (i_val == 2)
-    {   add_light(id);   }
-    else if (i_val == 3)
-    {   add_heater(id);  }
-    else if (i_val == 4)
-    {   add_coffee(id);  }
 }
 
 void Room::add_door(int id) {
@@ -249,6 +251,25 @@ void Room::add_heater(int id) {
     }
     Heater* new_l = new Heater(name, id, val, onOff);
     heaterList.push_back(new_l);
+}
+
+void Room::add_instrument(int id, int i_val) {
+    if (i_val == 1)
+    {
+        add_door(id);
+    }
+    else if (i_val == 2)
+    {
+        add_light(id);
+    }
+    else if (i_val == 3)
+    {
+        add_heater(id);
+    }
+    else if (i_val == 4)
+    {
+        add_coffee(id);
+    }
 }
 
 void Room::delete_door(int choice) {
@@ -366,7 +387,35 @@ void Room::delete_coffee(int choice) {
     }
 }
 
-void Room::configure_door(int choice) {
+
+void Room::delete_instrument(int choice) {
+    if (choice == 1)
+    {
+        delete_door(0);
+    }
+    else if (choice == 2)
+    {
+        delete_light(0);
+    }
+    else if (choice == 3)
+    {
+        delete_heater(0);
+    }
+    else if (choice == 4)
+    {
+        delete_coffee(0);
+    }
+}
+
+
+void Room::delete_all_instruments() {
+    delete_door(1);
+    delete_light(1);
+    delete_heater(1);
+    delete_coffee(1);
+}
+
+void Room::configure_door() {
     int c;
     int c2;
     char c3;
@@ -408,7 +457,7 @@ void Room::configure_door(int choice) {
     }
 }
 
-void Room::configure_light(int choice) {
+void Room::configure_light() {
     std::cout << "configure light...\n";
     int c;
     int c2;
@@ -460,7 +509,8 @@ void Room::configure_light(int choice) {
     }
 }
 
-void Room::configure_heater(int choice) {
+
+void Room::configure_heater() {
     std::cout << "configure heater...\n";
     int c;
     int c2;
@@ -509,8 +559,32 @@ void Room::configure_heater(int choice) {
     }
 }
 
-void Room::configure_coffee(int choice) {
-    std::cout << "configure coffee...\n";
+void Room::turn_instruments(int choice, Position position) {
+
+    if (choice == 1 || choice == 5) {
+        for (int i = 0; i < doorList.size(); i++) {
+            doorList[i]->set_pos(position);
+        }
+    }
+    if (choice == 2 || choice == 5) {
+        for (int i = 0; i < lightList.size(); i++) {
+            lightList[i]->set_pos(position);
+        }
+    }
+    if (choice == 3 || choice == 5) {
+        for (int i = 0; i < heaterList.size(); i++) {
+            heaterList[i]->set_pos(position);
+        }
+    }
+    if (choice == 4 || choice == 5) {
+        for (int i = 0; i < coffeeList.size(); i++) {
+            coffeeList[i]->set_pos(position);
+        }
+    }
+}
+
+void Room::configure_coffee() {
+    std::cout << "configure coffee machine...\n";
     int c;
     int c2;
     char c3;
@@ -548,7 +622,9 @@ void Room::configure_coffee(int choice) {
                     coffeeList[c - 1]->set_pos(Position::Off);
                 }
                 else
-                {   std::cout << "Invalid input, no change in status\n";  }
+                {
+                    std::cout << "Invalid input, no change in status\n";
+                }
             }
             if (c2 == 3 || c2 == 6) {
                 std::cout << "Set new amount of cups: ";
@@ -576,6 +652,49 @@ void Room::configure_coffee(int choice) {
     else { std::cout << "There are no coffe machines in this room!\n"; }
 }
 
+void Room::configure_instrument(int choice) {
+    if (choice == 1)
+    {
+        configure_door();
+    }
+    else if (choice == 2)
+    {
+        configure_light();
+    }
+    else if (choice == 3)
+    {
+        configure_heater();
+    }
+    else if (choice == 4)
+    {
+        configure_coffee();
+    }
+}
+int Room::instrument_count(int c) {
+    if (c == 1) {
+        return doorList.size();
+    }
+    else if (c == 2) {
+        return lightList.size();
+    }
+    else if (c == 3) {
+        return heaterList.size();
+    }
+    else if (c == 4) {
+        return coffeeList.size();
+    }
+    else if (c == 5) {
+        return (doorList.size() + lightList.size() + heaterList.size() + coffeeList.size());
+    }
+    else {
+        std::cout << "invalid option!";
+        return 0;
+    }
+}
+
+
+// BELOW  IS FUNCTIONS FOR TESTING!
+
 void Room::quick_door(std::string name, int id, Position openClosed) {
     Door* new_d = new Door(name, id, openClosed);
     doorList.push_back(new_d);
@@ -595,17 +714,18 @@ void Room::quick_heater(std::string name, int id, int val, Position onOff) {
     heaterList.push_back(new_l);
 }
 
-void Room::quick_start() {
+void Room::quick_start(int h_id, int roomsize) {
+    int temp = h_id * roomsize * 200;
     std::cout << "Adding 4 doors, 4 lights, coffe machine and 2 heaters...\n";
-    quick_door("Hoved", 1,      Position::On );
-    quick_door("Side",  2,      Position::Off);
-    quick_door("Bak",   3,      Position::Off);
-    quick_door("Skap",  4,      Position::On );
-    quick_light("Tak",  5, 13,  Position::On,  true  );
-    quick_light("Vegg", 6, 17,  Position::Off, false );
-    quick_light("Bord", 7, 25,  Position::Off, true  );
-    quick_light("Gulv", 8, 90,  Position::On,  false );
-    quick_coffee("Mocca", 9, 4, Position::On, 8, true);
-    quick_heater("Radiator", 10, 25, Position::On    );
-    quick_heater("Varmekabler", 11, 32, Position::Off);
+    quick_door("Hoved", temp + 1,      Position::On );
+    quick_door("Side",  temp + 2,      Position::Off);
+    quick_door("Bak",   temp + 3,      Position::Off);
+    quick_door("Skap",  temp + 4,      Position::On );
+    quick_light("Tak",  temp + 5, 13,  Position::On,  true  );
+    quick_light("Vegg", temp + 6, 17,  Position::Off, false );
+    quick_light("Bord", temp + 7, 25,  Position::Off, true  );
+    quick_light("Gulv", temp + 8, 90,  Position::On,  false );
+    quick_coffee("Mocca", temp + 9, 4, Position::On, 8, true);
+    quick_heater("Radiator", temp + 10, 25, Position::On    );
+    quick_heater("Varmekabler", temp + 11, 32, Position::Off);
 }

@@ -26,6 +26,9 @@ public:
     void quick_light(std::string name, int id, int val, Position onOff, bool digital);
     void quick_coffee(std::string name, int id, int val, Position onOff, int time, bool daily);
     void quick_heater(std::string name, int id, int val, Position onOff);
+    void delete_all_instruments();
+    void delete_instrument(int choice);
+    void configure_instrument(int choice);
     void delete_door(int choice);
     void delete_light(int choice);
     void delete_heater(int choice);
@@ -33,18 +36,21 @@ public:
     void add_light(int id);
     void add_coffee(int id);
     void add_heater(int id);
+    void turn_instruments(int choice, Position position);
     void print_room(int header);
     void print_door(int header);
     void print_light(int header);
     void print_coffee(int header);
     void print_heater(int header);
-    void configure_door(int choice);
-    void configure_light(int choice);
-    void configure_heater(int choice);
-    void configure_coffee(int choice);
-    void quick_start();
+    void configure_door();
+    void configure_light();
+    void configure_heater();
+    void configure_coffee();
+    int instrument_count(int c);
+    void quick_start(int h_id, int roomsize);
     std::string r_get_name() { return r_name; };
     int r_get_id() { return r_id; };
+    ~Room() {};
 };
 
 
