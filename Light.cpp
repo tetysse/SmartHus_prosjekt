@@ -3,12 +3,20 @@
 std::string Light::print_out() {
 	std::string temp;
 	std::cout << "Light name: " << i_name;
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	std::cout << "\tCurrently: ";
 	if (i_pos == Position::On)
 	{
-		temp = "On";
+		SetConsoleTextAttribute(hConsole, 2); //Green
+		std::cout << "On";
+		SetConsoleTextAttribute(hConsole, 7); // white
 	}
-	else { temp = "Off"; }
-	std::cout << "\tCurrently: " << temp;
+	else
+	{
+		SetConsoleTextAttribute(hConsole, 4); // Red
+		std::cout << "Off";
+		SetConsoleTextAttribute(hConsole, 7); //white
+	}
 	if (l_dig == false) {
 		std::cout << "\tLight: \%: " << (temp == "On" ? l_val : 0) << std::endl;
 	}

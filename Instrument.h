@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <windows.h>
 
 enum class Position : bool { On, Off };
 

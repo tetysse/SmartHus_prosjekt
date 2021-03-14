@@ -21,7 +21,20 @@ void Room::print_door(int header) {
             temp_n = doorList[i]->get_name();
             std::cout << i + 1 << ": Name: " << temp_n;
             n_space_management(temp_n.size());
-            std::cout << "Position: " << (digital_pos == true ? "Open" : "Closed") << "\n";
+            std::cout << "Position: ";// << (digital_pos == true ? "Open" : "Closed") << "\n";
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            if (digital_pos == true)
+            {
+                SetConsoleTextAttribute(hConsole, 2); //Green
+                std::cout << "Open\n";
+                SetConsoleTextAttribute(hConsole, 7); // white
+            }
+            else
+            {
+                SetConsoleTextAttribute(hConsole, 4); // Red
+                std::cout << "Closed\n";
+                SetConsoleTextAttribute(hConsole, 7); //white
+            }
         }
         if (doorList.size() == 0) {
             std::cout << "There are no doors configured in this room!\n";
@@ -48,7 +61,20 @@ void Room::print_light(int header) {
             temp_n = lightList[i]->get_name();
             std::cout << i + 1 << ": Name: " << temp_n;
             n_space_management(temp_n.size());
-            std::cout << "Status: " << (digital_pos == true ? "On" : "Off");
+            std::cout << "Status: ";
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            if (digital_pos == true)
+            {
+                SetConsoleTextAttribute(hConsole, 2); //Green
+                std::cout << "On";
+                SetConsoleTextAttribute(hConsole, 7); // white
+            }
+            else
+            {
+                SetConsoleTextAttribute(hConsole, 4); // Red
+                std::cout << "Off";
+                SetConsoleTextAttribute(hConsole, 7); //white
+            }
             if (digital_pos == true) { std::cout << ",  "; }
             else { std::cout << ", "; }
             if (lightList[i]->l_get_dig() == true) {
@@ -85,7 +111,20 @@ void Room::print_heater(int header) {
                 temp_n = heaterList[i]->get_name();
                 std::cout << i + 1 << ": Name: " << temp_n;
                 n_space_management(temp_n.size());
-                std::cout << "Currently: " << (digital_pos == true ? "On" : "Off");
+                std::cout << "Currently: ";// << (digital_pos == true ? "On" : "Off");
+                HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+                if (digital_pos == true)
+                {
+                    SetConsoleTextAttribute(hConsole, 2); //Green
+                    std::cout << "On";
+                    SetConsoleTextAttribute(hConsole, 7); // white
+                }
+                else
+                {
+                    SetConsoleTextAttribute(hConsole, 4); // Red
+                    std::cout << "Off";
+                    SetConsoleTextAttribute(hConsole, 7); //white
+                }
                 if (digital_pos == true) { std::cout << ",  "; }
                 else { std::cout << ", "; }
                 std::cout << " Set point: " << analog_pos << " \370C\n";
@@ -114,7 +153,20 @@ void Room::print_coffee(int header) {
             temp_n = coffeeList[i]->get_name();
             std::cout << i+1 << ": Name: " << temp_n;
             n_space_management(temp_n.size());
-            std::cout << "Currently: " << (digital_pos == true ? "On" : "Off");
+            std::cout << "Currently: ";// << (digital_pos == true ? "On" : "Off");
+            HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+            if (digital_pos == true)
+            {
+                SetConsoleTextAttribute(hConsole, 2); //Green
+                std::cout << "On";
+                SetConsoleTextAttribute(hConsole, 7); // white
+            }
+            else
+            {
+                SetConsoleTextAttribute(hConsole, 4); // Red
+                std::cout << "Off";
+                SetConsoleTextAttribute(hConsole, 7); //white
+            }
             if (digital_pos == true) { std::cout << ",  "; }
             else { std::cout << ", "; }
             digital_pos = coffeeList[i]->c_get_daily();

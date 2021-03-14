@@ -30,6 +30,7 @@ void main_menu() {
     std::cout << "Press '5' to read from file\n";
     std::cout << "Press '6' to write to file\n";
     std::cout << "Press '7' to move a person\n";
+    std::cout << "Press '8' to add a person\n";
     std::cout << "Press '9' to print info about the all the houses\n";
     std::cout << "Press '0' to close the program\n";
     std::cout << "----------------------------------------------------------------\n";
@@ -63,10 +64,12 @@ void doWork(Overview* new_o)
     }
     else if (val == 6) {
         new_o->saveToFile();
-        // to be continued
     }
     else if (val == 7) {
-        // to be continued
+        new_o->move_person();
+    }
+    else if (val == 8) {
+        new_o->add_person();
     }
     else if (val == 9) {
         new_o->print_houses();

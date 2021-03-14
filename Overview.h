@@ -30,6 +30,10 @@ public:
 	std::string getTypeAndValues(Instrument* instrument);
 	void saveToFile();
 	void set_time(int* time_);
-	~Overview() {};
+	void move_person();
+	void Move(int i, int j, int k);
+	void add_person();
+	void add_person(House* house);
+	~Overview() {}
 };
 

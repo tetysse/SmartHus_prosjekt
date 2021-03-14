@@ -205,7 +205,7 @@ void Overview::read_config_file()
                     }
                 }
                 std::string::size_type sz;   // alias of size_t
-                Person* person = new Person(Person_attributes[0], house->get_persons().size(), std::stoi(Person_attributes[1], &sz), std::stoi(Person_attributes[2], &sz), room);
+                Person* person = new Person(Person_attributes[0], house->get_persons().size() +1, std::stoi(Person_attributes[1], &sz), std::stoi(Person_attributes[2], &sz), room);
                 house->add_person(person);
             }
 
@@ -344,4 +344,104 @@ void Overview::set_time(int* time_)
     //{
     //    house_list[0]->set_all_lights(70);
     //}
+}
+
+void Overview::move_person()
+{
+    int val, c, p, r;
+    char a;
+    std::cout << "First select which house:\n";
+    std::cout << "----------------------------------------------------------------\n";
+    for (int i = 0; i < houseList.size(); i++) {
+        std::cout << "Press '" << i + 1 << "' to select " << houseList[i]->h_get_name() << std::endl;
+    }
+    std::cout << "Press '0' to return to overview menu\n";
+    std::cout << "----------------------------------------------------------------\n";
+    std::cin >> c;
+    if (c != 0 || c > houseList.size() + 1) {
+    	if(houseList[c - 1]->get_persons().empty())
+    	{
+            std::cout << "Sorry house \"" << houseList[c - 1]->h_get_name() << "\" does not have any persons"<< "\n";
+            std::cout << "Do you want to add a person? (Y/N) " << "\n";
+            std::cin >> a;
+            if (a == 'Y' || a == 'y')
+            {
+                add_person(houseList[c - 1]);
+            }
+            else
+            {
+                return;
+            }
+            
+    	}
+        for (int j = 0; j < houseList[c- 1]->get_persons().size(); j++)
+        {
+            std::cout << "Press '" << j + 1 << "' to select " << houseList[c - 1]->get_persons()[j]->getPersonName() << std::endl;
+        }
+        std::cout << "----------------------------------------------------------------\n";
+        std::cin >> p;
+        if (p != 0 || p > houseList[c - 1]->get_persons().size() + 1)
+        {
+            std::cout << "Select which room to move \""<< houseList[c - 1]->get_persons()[p - 1]->getPersonName() << "\" to:\n";
+            std::cout << "----------------------------------------------------------------\n";
+            for (int k = 0; k < houseList[c - 1]->h_get_num_rooms(); k++) {
+                Room* r = houseList[c - 1]->get_room(k);
+                if (r == houseList[c - 1]->get_persons()[p - 1]->get_room()) continue;
+                std::cout << "Press '" << k + 1 << "' to select " << houseList[c - 1]->get_room(k)->r_get_name() << std::endl;
+            }
+            std::cout << "----------------------------------------------------------------\n";
+            std::cin >> r;
+            if (r != 0 || r > houseList[c - 1]->h_get_num_rooms() + 1)
+            {
+                Move(c, p, r);
+            }
+        }
+    }
+}
+
+void Overview::Move(int i, int j, int k)
+{
+    Person* person = houseList[i - 1]->get_persons()[j - 1];
+    Room* room = houseList[i - 1]->get_rooms()[k - 1];
+    person->Move(room);
+}
+
+void Overview::add_person()
+{
+    int c;
+    std::cout << "First select which house:\n";
+    std::cout << "----------------------------------------------------------------\n";
+    for (int i = 0; i < houseList.size(); i++) {
+        std::cout << "Press '" << i + 1 << "' to select " << houseList[i]->h_get_name() << std::endl;
+    }
+    std::cout << "Press '0' to return to overview menu\n";
+    std::cout << "----------------------------------------------------------------\n";
+    std::cin >> c;
+    if (c != 0 || c > houseList.size() + 1) {
+        add_person(houseList[c - 1]);
+    }
+}
+
+void Overview::add_person(House* house)
+{
+    int c, t, l;
+    std::string name;
+    std::cout << "Select room:\n";
+    std::cout << "----------------------------------------------------------------\n";
+    for (int i = 0; i < house->h_get_num_rooms(); i++) {
+        std::cout << "Press '" << i + 1 << "' to select " << house->get_room(i)->r_get_name() << std::endl;
+    }
+    std::cout << "Press '0' to return to overview menu\n";
+    std::cout << "----------------------------------------------------------------\n";
+    std::cin >> c;
+    if (c != 0 || c > house->h_get_num_rooms() + 1) {
+        std::cout << "Add a name to the Person\n";
+        std::cin >> name;
+        std::cout << "What is the preffered temperature for \"" << name <<"\"\n";
+        std::cin >> t;
+        std::cout << "What is the preffered lightstrength for \"" << name << "\"\n";
+        std::cin >> l;
+        Person* p = new Person(name, house->get_persons().size() + 1, t, l, house->get_room(c-1));
+        house->add_person(p);
+    }
 }
