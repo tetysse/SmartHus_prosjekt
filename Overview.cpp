@@ -1,6 +1,6 @@
 #include "Overview.h"
 
-#include "Person.h"
+
 
 void Overview::add_house() {
     std::string name;
@@ -346,12 +346,12 @@ void Overview::set_time(int* time_)
     {
         if(coffee_machines[i]->c_get_time() == time)
         {
-            static_cast<Instrument*>(coffee_machines[i])->set_pos(Position::On); 
-            std::cout << "Coffe Machine: \"" << static_cast<Instrument*>(coffee_machines[i])->get_name() << "\" was turned on, making " << coffee_machines[i]->c_get_status() <<" cups of coffe\n";
-        }else if(static_cast<Instrument*>(coffee_machines[i])->get_pos() == true)
+            coffee_machines[i]->set_pos(Position::On); 
+            std::cout << "Coffe Machine: \"" << coffee_machines[i]->get_name() << "\" was turned on, making " << coffee_machines[i]->c_get_status() <<" cups of coffe\n";
+        }else if(coffee_machines[i]->get_pos() == true)
         {
-            static_cast<Instrument*>(coffee_machines[i])->set_pos(Position::Off);
-            std::cout << "Coffe Machine: \"" << static_cast<Instrument*>(coffee_machines[i])->get_name() << "\" was turned off\n";
+            coffee_machines[i]->set_pos(Position::Off);
+            std::cout << "Coffe Machine: \"" << coffee_machines[i]->get_name() << "\" was turned off\n";
         }
     }
     //CoffeMachine* cm = static_cast<CoffeMachine*>(house_list[0]->get_rooms()[0]->get_instrument(0));

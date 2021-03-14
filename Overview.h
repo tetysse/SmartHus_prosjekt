@@ -10,6 +10,7 @@
 
 #include "House.h"
 #include "Room.h"
+#include "Person.h"
 
 
 class Overview

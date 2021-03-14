@@ -8,6 +8,7 @@ Person::Person(std::string name, int i, int temp, int light, Room* room_)
 	preffered_lightstrength = light;
 	room = room_;
 	room_->set_all_lights(light);
+	//TODO: do the same for temperature
 }
 
 void Person::print()
@@ -24,4 +25,5 @@ void Person::Move(Room* r)
 {
 	room = r;
 	r->set_all_lights(preffered_lightstrength);
+	//TODO: do the same for temperature
 }
