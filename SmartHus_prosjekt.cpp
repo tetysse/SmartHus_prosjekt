@@ -63,7 +63,7 @@ void doWork(Overview* new_o)
         new_o->print_houses();
     }
     else if (val == 6) {
-        new_o->saveToFile();
+        new_o->save_to_file();
     }
     else if (val == 7) {
         new_o->move_person();
