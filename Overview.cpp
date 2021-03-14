@@ -268,7 +268,7 @@ std::string Overview::getTypeAndValues(Instrument * instrument)
 }
 
 
-void Overview::saveToFile()
+void Overview::save_to_file()
 {
     //Code copied from https://www.codespeedy.com/how-to-get-current-directory-in-cpp/
     const int PATH_MAX = 500;

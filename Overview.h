@@ -30,7 +30,7 @@ public:
 	void add_instruments(std::string line, Room* room);
 	std::vector<std::string> split(const std::string& str, const std::string& delim);
 	std::string getTypeAndValues(Instrument* instrument);
-	void saveToFile();
+	void save_to_file();
 	std::vector<Coffee_Machine*> getAllCoffeMachines();
 	void set_time(int* time_);
 	void move_person();
