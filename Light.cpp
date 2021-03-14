@@ -8,13 +8,13 @@ std::string Light::print_out() {
 	if (i_pos == Position::On)
 	{
 		SetConsoleTextAttribute(hConsole, 2); //Green
-		std::cout << "On";
+		std::cout << "On ";
 		SetConsoleTextAttribute(hConsole, 7); // white
 	}
 	else
 	{
 		SetConsoleTextAttribute(hConsole, 4); // Red
-		std::cout << "Off";
+		std::cout << "Off ";
 		SetConsoleTextAttribute(hConsole, 7); //white
 	}
 	if (l_dig == false) {
