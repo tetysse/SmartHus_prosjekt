@@ -1,11 +1,13 @@
 House
 Andebyveien 1
 Kjokken(Stue Off);Soverom(Stue On Bad Off);Bad(Stue Off);Stue
-Heater(Heater) 25 Off, KaffeMaskin(Coffe) 2 Off 8 daily,lys1(Light) 0 Off digital,lys2(Light) 10 On digital,lys3(Light) 100 On analog;B(Heater) 22 Off,abc(Light) 100 On digital,abc2(Light) 50 Off digital,abc3(Light) 100 Off analog;lys1(Light) 100 On analog;VarmeOvn(Heater) 23 On, Lys1(Light) 100 On analog, lysDigital(Light) 0 Off digital, lysAnalog(Light) 10 On analog
-Person;Donald Duck,21,77,Soverom
+lys1(Light) 42 Off digital,lys2(Light) 42 On digital,lys3(Light) 42 On analog,Heater(Heater) 25 Off , KaffeMaskin(Coffe) 2 Off 8 daily;abc(Light) 77 On digital,abc2(Light) 77 Off digital,abc3(Light) 77 Off analog,B(Heater) 22 Off ;lys1(Light) 100 On analog; Lys1(Light) 77 On analog, lysDigital(Light) 77 Off digital, lysAnalog(Light) 77 On analog,VarmeOvn(Heater) 23 On 
+Person;Donald Duck,21,77,Stue
 Person;Anders And,29,42,Kjokken
 
 House
 Andebyveien 2
 Pengebinge
-Ovn(Heater) 25 Off,Lys1(Light) 100 On digital,Lys2(Light) 50 Off digital
+Lys1(Light) 30 On digital,Lys2(Light) 30 Off digital,Ovn(Heater) 25 Off ,MoneyTalks(Coffe) 4 Off 5 daily
+Person;Doffen,26,30,Pengebinge
+

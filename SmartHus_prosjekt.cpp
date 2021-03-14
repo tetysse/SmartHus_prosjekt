@@ -111,10 +111,15 @@ void simulateClock(int n, Overview* ov)
             run = true;
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(n));
+        
         time_++;
         std::cout << "------- Time is Now: "<< (time_ < 10 ? "0" : "") << time_ << ":00 ---------" << std::endl;
         ov->set_time(&time_);
-        //ov->print_houses();
+        
+    	if(time_ == 23)
+    	{
+            time_ = -1; // set -1 so that next time the clock is 0.
+    	}
     }
 
 }
