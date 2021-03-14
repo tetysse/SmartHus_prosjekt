@@ -24,6 +24,7 @@ public:
     void add_door(int id);
     void add_door(std::string name, std::string pos);
     std::vector<Door*> get_doors() { return doorList; }
+    std::vector<Coffee_Machine*> get_coffee_machines() { return coffeeList; }
     std::vector<Instrument*> get_all_instruments();
     void quick_door(std::string name, int id, Position openClosed);
     void quick_light(std::string name, int id, int val, Position onOff, bool digital);

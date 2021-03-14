@@ -324,9 +324,35 @@ void Overview::saveToFile()
     outputFile.close();
 }
 
+std::vector<Coffee_Machine*> Overview::getAllCoffeMachines()
+{
+    std::vector<Coffee_Machine*> coffee_machines;
+    for (int i = 0; i < houseList.size(); i++)
+    {
+        for (int j = 0; j < houseList[i]->h_get_num_rooms(); j++)
+        {
+            std::vector<Coffee_Machine*> cm = houseList[i]->get_room(j)->get_coffee_machines();
+            coffee_machines.insert(coffee_machines.end(), cm.begin(), cm.end());
+        }
+    }
+    return coffee_machines;
+}
+
 void Overview::set_time(int* time_)
 {
-    //time = *time_;
+    time = *time_;
+    std::vector<Coffee_Machine*> coffee_machines = getAllCoffeMachines();
+    for (int i = 0; i < coffee_machines.size(); i++)
+    {
+        if(coffee_machines[i]->c_get_time() == time)
+        {
+            static_cast<Instrument*>(coffee_machines[i])->set_pos(Position::On); 
+            std::cout << "Coffe Machine: \"" << static_cast<Instrument*>(coffee_machines[i])->get_name() << "\" was turned on, making " << coffee_machines[i]->c_get_status() <<" cups of coffe\n";
+        }else
+        {
+            static_cast<Instrument*>(coffee_machines[i])->set_pos(Position::Off);
+        }
+    }
     //CoffeMachine* cm = static_cast<CoffeMachine*>(house_list[0]->get_rooms()[0]->get_instrument(0));
     //if (time < 10)
     //{

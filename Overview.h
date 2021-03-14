@@ -17,6 +17,7 @@ class Overview
 protected:
 	std::string o_name;
 	std::vector<House*> houseList;
+	int time;
 public:
 	Overview(std::string name) { o_name = name; };
 	void print_houses();
@@ -29,6 +30,7 @@ public:
 	std::vector<std::string> split(const std::string& str, const std::string& delim);
 	std::string getTypeAndValues(Instrument* instrument);
 	void saveToFile();
+	std::vector<Coffee_Machine*> getAllCoffeMachines();
 	void set_time(int* time_);
 	void move_person();
 	void Move(int i, int j, int k);

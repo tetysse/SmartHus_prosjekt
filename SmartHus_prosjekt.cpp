@@ -113,7 +113,7 @@ void simulateClock(int n, Overview* ov)
         std::this_thread::sleep_for(std::chrono::milliseconds(n));
         time_++;
         std::cout << "------- Time is Now: " << time_ << " ---------" << std::endl;
-        //ov->set_time(&time_);
+        ov->set_time(&time_);
         //ov->print_houses();
     }
 
