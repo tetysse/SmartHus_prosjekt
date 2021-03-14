@@ -388,6 +388,14 @@ void Room::delete_light(int choice) {
     }
 }
 
+void Room::set_all_lights(int val)
+{
+    for (int i = 0; i < lightList.size(); i++)
+    {
+        lightList[i]->l_set_val(val);
+    }
+}
+
 void Room::delete_heater(int choice) {
     int c;
     int size = heaterList.size();
@@ -809,9 +817,6 @@ std::vector<std::string> Room::split(const std::string& str, const std::string& 
     } while (pos < str.length() && prev < str.length());
     return tokens;
 }
-
-// BELOW  IS FUNCTIONS FOR TESTING!
-
 std::vector<Instrument*> Room::get_all_instruments()
 {
    std::vector<Instrument*> result;
@@ -821,6 +826,8 @@ std::vector<Instrument*> Room::get_all_instruments()
 	
    return result;
 }
+
+// BELOW  IS FUNCTIONS FOR TESTING!
 
 void Room::quick_door(std::string name, int id, Position openClosed) {
     Door* new_d = new Door(name, id, openClosed);

@@ -35,6 +35,7 @@ public:
     void configure_instrument(int choice);
     void delete_door(int choice);
     void delete_light(int choice);
+    void set_all_lights(int val);
     void delete_heater(int choice);
     void delete_coffee(int choice);
     void add_light(int id);
