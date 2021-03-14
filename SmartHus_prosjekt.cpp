@@ -102,7 +102,7 @@ void simulateClock(int n, Overview* ov)
     {
         doWork(ov);
     }
-    while (time_ < 30 && !finished)
+    while (time_ < 24 && !finished)
     {
         if (!run)
         {
@@ -112,7 +112,7 @@ void simulateClock(int n, Overview* ov)
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(n));
         time_++;
-        std::cout << "------- Time is Now: " << time_ << " ---------" << std::endl;
+        std::cout << "------- Time is Now: "<< (time_ < 10 ? "0" : "") << time_ << ":00 ---------" << std::endl;
         ov->set_time(&time_);
         //ov->print_houses();
     }
