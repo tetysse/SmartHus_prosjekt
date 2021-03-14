@@ -73,7 +73,7 @@ void House::configure_room() {
 		if (c != 0)
 		{
 			std::cout << "----------------------------------------------------------------\n";
-			std::cout << "                   Room: " << roomList[c - 1]->r_get_name();
+			std::cout << "                   Room: " << roomList[c - 1]->r_get_name() << std::endl;
 			std::cout << "----------------------------------------------------------------\n";
 			std::cout << "Do you wish to:\n";
 			std::cout << "1:  Add a door\n";
@@ -83,7 +83,7 @@ void House::configure_room() {
 			std::cout << "11: Add a light\n";
 			std::cout << "12: Remove a light\n";
 			std::cout << "13: Configure a light\n";
-			std::cout << "14: Turn on/off all lights";
+			std::cout << "14: Turn on/off all lights\n";
 			std::cout << "21: Add a heater\n";
 			std::cout << "22: Remove a heater\n";
 			std::cout << "23: Configure a heater\n";
