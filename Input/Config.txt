@@ -1,4 +1,15 @@
 House
+Akebakken
+Stue(Hoved On Side Off Bak Off Skap On);Gang(Hoved On Side Off Bak Off Skap On);bad
+Tak(Light) 77 On digital,Vegg(Light) 77 Off analog,Bord(Light) 77 Off digital,Gulv(Light) 77 On analog,Radiator(Heater) 25 On ,Varmekabler(Heater) 32 Off ,Mocca(Coffe) 4 Off 8 daily;Tak(Light) 13 On digital,Vegg(Light) 17 Off analog,Bord(Light) 25 Off digital,Gulv(Light) 90 On analog,Radiator(Heater) 25 On ,Varmekabler(Heater) 32 Off ,Mocca(Coffe) 4 Off 8 daily;Varmekabler(Heater) 33 On 
+Person;Harald,77,77,bad
+
+House
+R†dhusplassen 4
+
+
+
+House
 Andebyveien 1
 Kjokken(Stue Off);Soverom(Stue On Bad Off);Bad(Stue Off);Stue
 lys1(Light) 42 Off digital,lys2(Light) 42 On digital,lys3(Light) 42 On analog,Heater(Heater) 25 Off , KaffeMaskin(Coffe) 2 Off 8 daily;abc(Light) 77 On digital,abc2(Light) 77 Off digital,abc3(Light) 77 Off analog,B(Heater) 22 Off ;lys1(Light) 100 On analog; Lys1(Light) 77 On analog, lysDigital(Light) 77 Off digital, lysAnalog(Light) 77 On analog,VarmeOvn(Heater) 23 On 

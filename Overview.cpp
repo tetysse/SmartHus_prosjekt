@@ -97,7 +97,7 @@ void Overview::change_address() {
     for (int i = 0; i < houseList.size(); i++) {
         std::cout << "House :" << i + 1 << " - " << houseList[i]->h_get_name() << std::endl;
     }
-    std::cout << "Choose which house to change address on: (1 - " << houseList.size() + 1 << ": ";
+    std::cout << "Choose which house to change address on: (1 - " << houseList.size() << "): ";
     std::cin >> c;
     std::cout << "Add a new address: ";
     std::cin >> name;
