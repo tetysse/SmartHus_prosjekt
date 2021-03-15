@@ -37,7 +37,7 @@ void Overview::remove_house() {
         std::cout << "House " << i + 1 << ": " << houseList[i]->h_get_name() << std::endl;
     }
     std::cout << "----------------------------------------------------------------\n";
-    std::cout << "Choice the number of the house you want to remove (1-" << size + 1 << ")\n";
+    std::cout << "Choice the number of the house you want to remove (1-" << size  << ")\n";
     std::cout << "Or press '0' to return to main menu\n";
     std::cin >> c;
     if (c != 0) {
